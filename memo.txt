@@ -1,0 +1,7 @@
+2023-12-12 화요일
+```
+$ npm install @nestjs/config
+.env 파일 생성
+.gitignore 수정
+app.module.ts 수정
+```
