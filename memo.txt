@@ -5,3 +5,20 @@ $ npm install @nestjs/config
 .gitignore 수정
 app.module.ts 수정
 ```
+
+2023-12-13 수요일
+```
+1. 서버 가동 시 포트 번호 로그로 출력되는 부분 추가
+
+2. hot reload를 위한 webpack 패키지 설치
+$ npm i --save-dev webpack-node-externals run-script-webpack-plugin webpack
+
+root 디렉토리에 webpack-hmr.config.js 파일 생성
+main.ts 수정
+package.json 수정
+
+
+다음 할 것
+users 모듈, 컨트롤러, 서비스 파일 생성
+typeorm 설치, rds 연결(mysql)
+```
