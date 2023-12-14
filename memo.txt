@@ -16,9 +16,16 @@ $ npm i --save-dev webpack-node-externals run-script-webpack-plugin webpack
 root 디렉토리에 webpack-hmr.config.js 파일 생성
 main.ts 수정
 package.json 수정
+```
 
+2023-12-14 목요일
+```
+1. users 모듈, 컨트롤러, 서비스 파일 생성
+$ nest generate module users
+$ nest generate controller users
+$ nest generate service users
 
-다음 할 것
-users 모듈, 컨트롤러, 서비스 파일 생성
-typeorm 설치, rds 연결(mysql)
+2. typeorm 설치, rds 연결(mysql)
+$ npm install @nestjs/typeorm typeorm mysql2
+root 디렉토리 dataSource.ts 파일 생성
 ```
