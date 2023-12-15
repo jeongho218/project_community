@@ -29,3 +29,12 @@ $ nest generate service users
 $ npm install @nestjs/typeorm typeorm mysql2
 root 디렉토리 dataSource.ts 파일 생성
 ```
+
+2023-12-15 금요일
+```
+1. swagger 패키지 설치
+$ npm install --save @nestjs/swagger
+
+main.ts에 swagger 설정 부분 추가
+
+```
