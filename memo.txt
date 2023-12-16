@@ -38,3 +38,11 @@ $ npm install --save @nestjs/swagger
 main.ts에 swagger 설정 부분 추가
 
 ```
+
+2023-12-16 토요일
+```
+1. 회원가입 관련 dto 생성(signup.request.dto)
+2. users 컨트롤러 내용 추가
+3. swagger 데코레이터 추가 
+4. 사용자에게 반환되는 내용의 형식을 지정하는 dto 생성(user.dto.ts)
+```
