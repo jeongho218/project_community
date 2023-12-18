@@ -46,3 +46,15 @@ main.ts에 swagger 설정 부분 추가
 3. swagger 데코레이터 추가 
 4. 사용자에게 반환되는 내용의 형식을 지정하는 dto 생성(user.dto.ts)
 ```
+
+2023-12-17 일요일
+```
+jwt 토큰 데코레이터 생성
+```
+
+2023-12-16 토요일
+```
+undefinedToNull.interceptor.ts 생성
+컨트롤러 실행 후 리턴하는 데이터가 undefined라면 이 데이터를 null로 변경하고,
+데이터가 undefined가 아니라면 data를 그대로 리턴한다.
+```
