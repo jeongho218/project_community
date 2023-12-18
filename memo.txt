@@ -52,9 +52,52 @@ main.ts에 swagger 설정 부분 추가
 jwt 토큰 데코레이터 생성
 ```
 
-2023-12-16 토요일
+2023-12-18 월요일
 ```
 undefinedToNull.interceptor.ts 생성
 컨트롤러 실행 후 리턴하는 데이터가 undefined라면 이 데이터를 null로 변경하고,
 데이터가 undefined가 아니라면 data를 그대로 리턴한다.
+```
+
+2023-12-19 화요일
+```
+typeorm에서 쓰기 위해 엔터티를 만들었다면
+이에 관한 dto는 별도로 만들 필요가 없다.
+nestjs에선 entity 클래스 또한 dto로써 사용할 수 있기 때문이다.
+
+1. users.entity.ts 생성
+우선 세션을 통한 로그인, 그 뒤에 jwt를 통한 로그인을 테스트할 예정이기에
+우선적으로 users.entity.ts 만 생성하였다.
+
+2. app.module.ts에 typeOrmModule 관련 설정 추가
+ormconfig.ts는 typeorm 0.2 버전 용이기에 사용하지 않고 app.module.ts에서 직접 사용한다.
+
+3. typeorm 관리 패키지 설치
+$ npm install typeorm-extension
+
+4. package.json에 typeorm 관련 명령어 추가
+"typeorm": "ts-node --require tsconfig-paths/register ./node_modules/typeorm/cli.js",
+"db:create": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs db:create -d ./dataSource.ts",
+"db:drop": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs db:drop -d ./dataSource.ts",
+"seed": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d ./dataSource.ts",
+"schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
+"schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync",
+"db:migrate": "npm run typeorm migration:run -- -d ./dataSource.ts",
+"db:migrate:revert": "npm run typeorm migration:revert -- -d ./dataSource.ts",
+"db:create-migration": "npm run typeorm migration:create -- ./src/migrations/",
+"db:generate-migration": "npm run typeorm migration:generate -- ./src/migrations -d ./dataSource.ts"
+
+seeding과 migrations은 사용하지 않을 것 같지만 일단 추가하였다.
+바로 package.json에 typeorm 명령어를 추가하고 DB부터 연결할 계획이다.
+
+5. dataSource.ts 생성
+typeorm-extension은 app.module/typeOrmModule의 내용을 직접 읽지 못한다.
+typeOrmModule의 내용을 dataSource.ts에도 적어준다.
+
+6. tsconfig.json 수정
+"esModuleInterop": true 옵션 등록
+https://ctrs.tistory.com/521
+
+이후 DB 생성 확인
+
 ```
