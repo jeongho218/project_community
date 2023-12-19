@@ -14,7 +14,7 @@ const dataSource = new DataSource({
   entities: [Users],
   migrations: [__dirname + '/src/migrations/*.ts'],
   charset: 'utf8mb4_general_ci',
-  synchronize: false,
+  synchronize: false, // 이건 false 고정, 테이블 생성은 app.module.ts에서
   logging: true,
 });
 

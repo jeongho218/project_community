@@ -7,21 +7,33 @@
 ### Install
 
 ```
-$ npm insall
+$ npm install
 ```
 
 ### Config .env
 
 ```
-PORT=/* 사용할 백엔드 포트 번호 */
-DB_HOST=/* aws rds 주소 */
-DB_USERNAME=/* aws rds admin 이름 */
-DB_PASSWORD=/* aws rds admin 패스워드 */
-DB_DATABASE=/* 사용할 데이터 베이스 이름 */
+PORT=/* Backend port number to use */
+DB_HOST=/* DB address (localhost or AWS RDS) */
+DB_USERNAME=/* DB admin name */
+DB_PASSWORD=/* DB admin password */
+DB_DATABASE=/* DB name to use */
 ```
 
 ### Running the app
 
 ```
 $ npm run start:dev
+```
+
+### Create DB (Default: MySQL)
+
+```
+$ npm run db:create
+```
+
+### Create Table
+
+```
+$ npm run schema:sync
 ```
