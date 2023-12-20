@@ -1,10 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { HttpExceptionFilter } from './common/exceptionFilter/http-exception.filter';
+import { ValidationPipe } from '@nestjs/common';
 declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // 에러처리
+  app.useGlobalPipes(new ValidationPipe()); // class-validation 사용
+  app.useGlobalFilters(new HttpExceptionFilter()); // 전체 컨트롤러에서 발생하는 http 관련 에러 처리
 
   // hot reload(webpack)
   if (module.hot) {

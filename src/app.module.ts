@@ -29,7 +29,7 @@ import { Users } from './users/users.entity';
         https://ctrs.tistory.com/472 */,
       charset: 'utf8mb4_general_ci' /** 이모티콘 사용을 위한 캐릭터셋 */,
     }),
-    // TypeOrmModule.forFeature([Users]), // 나중에 쓸 것
+    TypeOrmModule.forFeature([Users]),
   ],
   controllers: [AppController],
   providers: [AppService, UsersService],

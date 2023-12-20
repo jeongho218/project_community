@@ -128,7 +128,38 @@ select:boolean이 있는데, 이는
 'select password from users'와 같이 컬럼명을 명시적으로 적어주어야만 내용이 출력된다.
 default는 true이다.
 
+----------------------------------------------------------
 
 
+
+1. SignUpRequestDto 내용을 users.entity에서 pickType으로 가져오도록 변경
+
+2. 패스워드 암호화 라이브러리 bcrypt 설치
+$ npm install bcrypt
+
+3. service에 Users 엔티티에 대한 의존성 주입
+users.module.ts와 app.module.ts의 imports에
+TypeOrmModule.forFeature([Users]) 추가
+
+4. exception filter 생성
+예를 들어 필요한 파라미터가 들어오지 않았을 경우의 에러처리를 할 때
+보통 throw new Error()로 진행하지만
+이 경우 이 에러의 로그가 서버 터미널에서는 출력되나
+사용자(요청자) 입장에서는 201 Created라고 나온다.
+기본적으로는 서버가 사용자에게 에러 내용을 공유하지 않기 때문이다.
+이를 해결하기 위해 에러 내용을 사용자에게 보여줄 exception filter를 생성
+
+5. class validator 설치
+$ npm install class-validator
+$ npm install class-transformer
+class-transformer는 class-validator와 세트인 라이브러리
+설치해달라는 에러 메세지가 나오므로 설치
+
+참고: https://github.com/typestack/class-validator
+
+회원가입 기능 작성 후 DB에 내용이 등록되는 것 까지 확인
+
+※ 인터셉터는 컨트롤러와 서비스의 앞뒤에서 실행되고, 
+익셉션 필터는 컨트롤러 뒤에서만 실행된다.
 
 ```
