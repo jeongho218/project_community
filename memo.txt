@@ -149,17 +149,87 @@ TypeOrmModule.forFeature([Users]) 추가
 기본적으로는 서버가 사용자에게 에러 내용을 공유하지 않기 때문이다.
 이를 해결하기 위해 에러 내용을 사용자에게 보여줄 exception filter를 생성
 
-5. class validator 설치
+5. class validator 설치(파이프)
 $ npm install class-validator
 $ npm install class-transformer
 class-transformer는 class-validator와 세트인 라이브러리
 설치해달라는 에러 메세지가 나오므로 설치
 
-참고: https://github.com/typestack/class-validator
+[참고] 사용 가능한 클래스 밸리데이터 데코레이터의 목록
+https://github.com/typestack/class-validator
+
+6. main.ts에 익셉션 필터와 파이프(class validator) 사용 선언
+app.useGlobalPipes(new ValidationPipe());
+app.useGlobalFilters(new HttpExceptionFilter());
+
 
 회원가입 기능 작성 후 DB에 내용이 등록되는 것 까지 확인
 
 ※ 인터셉터는 컨트롤러와 서비스의 앞뒤에서 실행되고, 
 익셉션 필터는 컨트롤러 뒤에서만 실행된다.
 
+```
+
+2023-12-20 수요일
+```
+1. 가드 사용
+users.controller의 로그인 api에서
+@UseGaurds() 데코레이터 사용
+
+가드는 nestjs의 라이프 사이클 상 미들웨어와 인터셉터 사이에서 사용되며,
+주어진 요청에 대한 authorization(승인 및 권한 부여)와 authentication(인증)에 대한 역할을 수행한다.
+
+데이터가 제대로 들어가있는지 체크할 수도 있지만,
+주요 목적은 컨트롤러에 접근하기 전에 권한이 있는지 확인하는 것
+
+제대로 로그인 한 상태인지, 아니라면 
+401 Unauthorized, 403 Forbidden 에러 발생 등을 담당한다.
+
+2. passport 설치
+$ npm install passport passport-local
+passport는 node.js 인증 라이브러리
+JWT와 세션 둘 다 가능
+
+passport-local은 이메일과 비밀번호로 로그인할때 쓰임
+
+$ npm install @nestjs/passport
+@nestjs/passport는 nestjs용으로 모듈화 된 passport
+
+3. 커스텀 가드 생성
+/src/auth/local-auth.guard.ts
+
+4. 인증 전략 생성
+/src/auth/local.strategy.ts
+
+5. auth.service 생성, DB에 접근하기 위한 용도
+/src/auth/auth.service.ts
+
+6. local.serializer 생성
+/src/auth/local.serializer.ts
+
+7. 위 내용들을 묶어줄 모듈 생성
+/src/auth/auth.module.ts
+
+인증 절차
+local-auth.gaurt.ts -> local.strategy.ts -> auth.service.ts
+-> local.strategy.ts -> local.serializer.ts
+
+8. cookie parser, express session 설치
+$ npm install cookie-parser express-session
+
+9. main.ts
+패스포트 사용 선언
+
+모듈에 넣을때, 
+@Injectable()이 붙었으면 provider,
+남의 모듈이면 imports,
+컨트롤러는 controller,
+서비스는 service,
+남에게 자신의 모듈을 제공할 예정이라면 exports
+
+이렇게 작성해주었으나 로그인에 이상이 발생
+제대로 이메일과 패스워드를 입력해 주었으나 아래와 같은 에러가 발생
+401 { message: 'Unauthorized', statusCode: 401 }
+
+해결 방안 탐색 중..
 ```

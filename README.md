@@ -18,6 +18,7 @@ DB_HOST=/* DB address (localhost or AWS RDS) */
 DB_USERNAME=/* DB admin name */
 DB_PASSWORD=/* DB admin password */
 DB_DATABASE=/* DB name to use */
+COOKIE_SECRET=/* secret key */
 ```
 
 ### Running the app

@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './users/users.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { Users } from './users/users.entity';
       charset: 'utf8mb4_general_ci' /** 이모티콘 사용을 위한 캐릭터셋 */,
     }),
     TypeOrmModule.forFeature([Users]),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, UsersService],

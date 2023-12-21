@@ -5,6 +5,7 @@ import {
   Post,
   Req,
   Res,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -12,6 +13,7 @@ import { SignUpRequestDto } from './dto/signup.request.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDto } from 'src/common/dto/user.dto';
 import { UndefinedToNullInterceptor } from '../common/interceptors/undefinedToNull.interceptor';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
 
 @UseInterceptors(UndefinedToNullInterceptor) // 이 컨트롤러에서 리턴하는 값이 undefined라면 이를 null로 변경한다.
 @ApiTags('USER')
@@ -40,6 +42,7 @@ export class UsersController {
     type: UserDto,
   })
   @ApiOperation({ summary: '로그인' })
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   logIn(@Req() req) {
     return req.user;
