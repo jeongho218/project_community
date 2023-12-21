@@ -34,6 +34,7 @@ export class UsersController {
   @Post()
   async signUp(@Body() body: SignUpRequestDto) {
     await this.usersService.signUp(body.email, body.nickname, body.password);
+    return `${body.nickname}님 환영합니다.`;
   }
 
   @ApiResponse({
@@ -45,7 +46,8 @@ export class UsersController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   logIn(@Req() req) {
-    return req.user;
+    console.log(`${req.user.email} 로그인 성공!`);
+    return `${req.user.nickname} 로그인 성공!`;
   }
 
   @ApiOperation({ summary: '로그아웃' })

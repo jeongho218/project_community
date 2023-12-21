@@ -18,6 +18,7 @@ export class AuthService {
     console.log(email, password, user);
 
     if (!user) {
+      console.log('존재하지 않는 사용자');
       return null;
     }
 

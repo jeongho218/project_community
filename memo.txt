@@ -247,4 +247,13 @@ LoggerMiddleware를 사용하겠다고 선언
 더 자세한 내용은 나오지 않았음
 다른 방법을 찾아봐야 할 듯
 
+1. 회원가입 부분에서 패스워드를 암호화 하는 부분과
+로그인 부분에서 패스워드를 암호화하여 DB에 저장된 패스워드가 일치하는지 확인하는 부분을 다시 확인해보자
+-> X 이 문제가 아니었음
+
+local-strategy에서 상위 함수를 사용하는 부분
+super({ usernameFiled: 'email', passwordFiled: 'password' })에서 오타가 나서 발생한 문제,
+'usernameField', 'passwordField'를 'usernameFiled', 'passwordfiled'라고 적어서 발생한 문제였음..
+
+정리: https://ctrs.tistory.com/523
 ```
