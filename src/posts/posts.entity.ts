@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @Entity({ name: 'Posts' })
 export class Posts {
@@ -17,12 +18,18 @@ export class Posts {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
-  @Column({ type: 'varchar', nullable: false })
+  @IsString()
+  @IsNotEmpty()
+  @Column({ type: 'varchar' })
   title: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  @Column()
+  @IsString()
+  @IsNotEmpty()
+  @Column({ type: 'varchar' })
   content: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  imgUrl: string;
 
   @CreateDateColumn()
   createdAt: Date;

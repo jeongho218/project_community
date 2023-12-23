@@ -307,4 +307,21 @@ npm run db:drop && npm run db:create && npm run schema:sync
 - 실행 방법
 ./remakeDB.sh
 
+---------------------------------------------------------
+1. posts에 CRUD 틀 작성
+C - createPost
+R - getAllPost, getSpecificPost
+U - updatePost
+D - deletePost
+
+2. posting.request.dto.ts 작성
+posts.entity에서 title과 content을 pickType으로 가져옴
+
+3. posts.entity 수정
+title과 content에 @IsString, @IsNotEmpty 데코레이터 등록
+imgUrl 컬럼 추가, 데이터 타입은 string(varchar), 이미지 업로드 용도
+이미지 업로드는 추후 추가 예정
+
+4. CRUD 중 C - creatPost api 작성 완료
+
 ```
