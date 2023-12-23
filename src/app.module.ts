@@ -8,11 +8,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './users/users.entity';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
+import { PostsModule } from './posts/posts.module';
+import { Posts } from './posts/posts.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     UsersModule,
+    AuthModule,
+    PostsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -20,7 +24,7 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Users],
+      entities: [Users, Posts],
       synchronize: false /**  개발 환경일 때만 true일 것
       직접 작성한 엔터티를 DB에 적용할 때 쓰이므로, 
       true일 경우 DB가 새로 생성되어 기존 DB에 저장된 데이터가 사라질 위험성이 있음*/,
@@ -32,13 +36,12 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
       charset: 'utf8mb4_general_ci' /** 이모티콘 사용을 위한 캐릭터셋 */,
     }),
     TypeOrmModule.forFeature([Users]),
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, UsersService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware).forRoutes('*'); // 모든 라우트에 로거 미들웨어 등록
   }
 }

@@ -35,7 +35,7 @@ export class UsersController {
   @ApiOperation({ summary: '내 회원정보 불러오기' })
   @Get()
   getUsers(@User() user: Users) {
-    return user || false;
+    return user || '로그인하지 않은 사용자입니다.';
   }
 
   @UseGuards(NotLoggedInGuard)

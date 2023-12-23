@@ -281,5 +281,21 @@ NotLoggedInGuard 가드가 데코레이터로 붙은 api는
 Users 엔티티에 isAdmin 컬럼 추가
 최초에 admin 계정을 생성하는 'admin-user-seed.ts' 생성
 /src/database/seeds/admin-user-seed.ts
+```
+
+2023-12-22 금요일
+```
+posts 모듈, 컨트롤러, 서비스 생성
+$ nest generate module posts
+$ nest generate controller posts
+$ nest generate service posts
+
+app.module.ts imports 목록에
+PostsModule 등록
+
+posts 엔티티 생성
+/src/posts/posts.entity.ts
+
+Users-Posts를 1대다 관계로 설정
 
 ```

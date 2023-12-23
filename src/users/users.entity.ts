@@ -4,10 +4,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Posts } from '../posts/posts.entity';
 
 @Entity({ name: 'Users' }) // DB에서 쓰일 테이블의 이름
 export class Users {
@@ -58,4 +60,11 @@ export class Users {
 
   @DeleteDateColumn()
   deletedAt: Date | null;
+
+  // Relation
+
+  @OneToMany(() => Posts, (post: Posts) => post.user, {
+    cascade: true,
+  })
+  post: Posts[];
 }

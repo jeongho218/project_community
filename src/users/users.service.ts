@@ -10,11 +10,6 @@ export class UsersService {
     @InjectRepository(Users) private usersRepository: Repository<Users>,
   ) {}
 
-  // 사용자 정보 가져오기 api
-  getUser() {
-    //
-  }
-
   // 회원가입 api
   async signUp(email: string, nickname: string, password: string) {
     const user = await this.usersRepository.findOne({
