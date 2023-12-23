@@ -275,3 +275,11 @@ NotLoggedInGuard 가드가 데코레이터로 붙은 api는
 @Req 대신 @Users, @Res 대신 @Response로 변경
 
 ```
+
+2023-12-22 금요일
+```
+Users 엔티티에 isAdmin 컬럼 추가
+최초에 admin 계정을 생성하는 'admin-user-seed.ts' 생성
+/src/database/seeds/admin-user-seed.ts
+
+```

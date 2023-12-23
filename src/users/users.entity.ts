@@ -47,6 +47,9 @@ export class Users {
    * default는 true이다. */
   password: string;
 
+  @Column({ type: 'boolean', default: false })
+  isAdmin: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 
