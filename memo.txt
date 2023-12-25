@@ -324,4 +324,10 @@ imgUrl 컬럼 추가, 데이터 타입은 string(varchar), 이미지 업로드 �
 
 4. CRUD 중 C - creatPost api 작성 완료
 
+추가해야하는 기능
+- 트랜잭션(테스트를 빠르게 하다보면 500 에러가 발생함)
+- 외래키 userId도 저장되게 하기
+- seed로 admin 계정 생성할때 패스워드도 암호화하게 작성
+- swagger 내용 더 채워 넣기
+
 ```
