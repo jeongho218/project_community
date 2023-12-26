@@ -18,6 +18,9 @@ export class Posts {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
+  @Column({ type: 'int' })
+  userId: number;
+
   @IsString()
   @IsNotEmpty()
   @Column({ type: 'varchar' })

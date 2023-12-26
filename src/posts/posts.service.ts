@@ -10,10 +10,11 @@ export class PostsService {
   ) {}
 
   // 글 작성
-  async createPost(title: string, content: string) {
+  async createPost(title: string, content: string, id: number) {
     await this.postsRepository.save({
       title: title,
       content: content,
+      userId: id,
     });
   }
 

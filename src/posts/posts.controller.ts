@@ -11,6 +11,8 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PostsService } from './posts.service';
 import { LoggedInGuard } from 'src/auth/logged-in.guard';
 import { PostingRequestDto } from './dto/posting.request.dto';
+import { User } from '../common/decorators/user.decorator';
+import { Users } from '../users/users.entity';
 
 @ApiTags('POSTS')
 @Controller('api/posts')
@@ -21,8 +23,8 @@ export class PostsController {
   @ApiOperation({ summary: '게시글 작성' })
   @UseGuards(LoggedInGuard)
   @Post()
-  async createPost(@Body() body: PostingRequestDto) {
-    await this.postsService.createPost(body.title, body.content);
+  async createPost(@Body() body: PostingRequestDto, @User() user: Users) {
+    await this.postsService.createPost(body.title, body.content, user.id);
     return `'${body.title}' 게시글 작성 완료`;
   }
 
