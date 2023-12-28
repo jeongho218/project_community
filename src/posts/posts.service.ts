@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Posts } from './posts.entity';
 import { Repository } from 'typeorm';
@@ -9,7 +13,7 @@ export class PostsService {
     @InjectRepository(Posts) private postsRepository: Repository<Posts>,
   ) {}
 
-  // 글 작성
+  // 글 작성 - userId 저장하는 부분 재검토 필요, 엔티티 관계 재확인 필요
   async createPost(title: string, content: string, id: number) {
     await this.postsRepository.save({
       title: title,
@@ -18,15 +22,56 @@ export class PostsService {
     });
   }
 
-  // 전체 글 가져오기
-  getAllPost() {}
+  // 게시글 개수 세기 - 완료
+  async countPost() {
+    return await this.postsRepository.count();
+  }
 
-  // 특정 글 가져오기
-  getSpecificPost() {}
+  // 전체 글 가져오기 - 완료
+  async getAllPost() {
+    return await this.postsRepository.find({});
+  }
 
-  // 글 수정
-  updatePost() {}
+  // 특정 글 가져오기 - 완료
+  async getSpecificPost(postId: number) {
+    // 게시글이 존재하는지 확인
+    const post = await this.postsRepository.findOne({ where: { id: postId } });
+    if (!post) {
+      throw new NotFoundException('게시글이 존재하지 않습니다.');
+    }
+    return post;
+  }
 
-  // 글 삭제
-  deletePost() {}
+  // 글 수정 - 작성 중
+  async updatePost(postId: number, userId: number) {
+    // 게시글이 존재하는지 확인
+    const post = await this.postsRepository.findOne({ where: { id: postId } });
+    if (!post) {
+      throw new NotFoundException('게시글이 존재하지 않습니다.');
+    }
+
+    // 현재 로그인한 사용자가 글 작성자인지 확인
+    if (post.userId !== userId) {
+      throw new ForbiddenException();
+    }
+
+    // this.postsRepository.update(); // 에러 발생하여 일시적으로 주석
+  }
+
+  // 글 삭제 - 완성
+  async deletePost(id: number, userId: number) {
+    // 게시글이 존재하는지 확인
+    const post = await this.postsRepository.findOne({ where: { id: id } });
+    if (!post) {
+      throw new NotFoundException('게시글이 존재하지 않습니다.');
+    }
+
+    // 현재 로그인한 사용자가 글 작성자인지 확인
+    if (post.userId !== userId) {
+      throw new ForbiddenException();
+    }
+
+    await this.postsRepository.delete(id);
+    return true;
+  }
 }

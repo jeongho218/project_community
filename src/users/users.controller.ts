@@ -29,6 +29,7 @@ import { Users } from './users.entity';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
+  // 회원 정보 불러오기
   @ApiResponse({
     type: UserDto,
   })
@@ -38,6 +39,7 @@ export class UsersController {
     return user || '로그인하지 않은 사용자입니다.';
   }
 
+  // 회원 가입
   @UseGuards(NotLoggedInGuard)
   @ApiOperation({ summary: '회원가입' })
   @Post()
@@ -46,6 +48,7 @@ export class UsersController {
     return `${body.nickname}님 환영합니다.`;
   }
 
+  // 로그인
   @ApiResponse({
     status: 200,
     description: '성공',
@@ -59,6 +62,7 @@ export class UsersController {
     return `${user.email} 로그인 성공!`;
   }
 
+  // 로그아웃
   @ApiCookieAuth('connect.sid')
   @UseGuards(LoggedInGuard)
   @ApiOperation({ summary: '로그아웃' })

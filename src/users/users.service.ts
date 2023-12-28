@@ -34,7 +34,7 @@ export class UsersService {
         .getRepository(Users)
         .save({ email: email, nickname: nickname, password: hashedPassword });
 
-      await queryRunner.commitTransaction();
+      await queryRunner.commitTransaction(); // 트랜잭션 내 변경 내용 커밋 및 완료
       return true;
     } catch (error) {
       console.log(error);
@@ -43,13 +43,5 @@ export class UsersService {
     } finally {
       await queryRunner.release(); // DB 연결 종료
     }
-
-    // before
-    // DB에 저장
-    // await this.usersRepository.save({
-    //   email: email,
-    //   nickname: nickname,
-    //   password: hashedPassword,
-    // });
   }
 }

@@ -12,7 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // 에러처리
-  app.useGlobalPipes(new ValidationPipe()); // 모든 컨트롤러에 class-validation 사용
+  app.useGlobalPipes(new ValidationPipe({ transform: true })); // 모든 컨트롤러에 class-validation, class-transformer 사용
   app.useGlobalFilters(new HttpExceptionFilter()); // 모든 컨트롤러에서 발생하는 http 관련 에러 처리
 
   // hot reload(webpack)
