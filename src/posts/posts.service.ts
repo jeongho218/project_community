@@ -42,8 +42,13 @@ export class PostsService {
     return post;
   }
 
-  // 글 수정 - 작성 중
-  async updatePost(postId: number, userId: number) {
+  // 글 수정 - 완료
+  async updatePost(
+    postId: number,
+    title: string,
+    content: string,
+    userId: number,
+  ) {
     // 게시글이 존재하는지 확인
     const post = await this.postsRepository.findOne({ where: { id: postId } });
     if (!post) {
@@ -52,10 +57,13 @@ export class PostsService {
 
     // 현재 로그인한 사용자가 글 작성자인지 확인
     if (post.userId !== userId) {
-      throw new ForbiddenException();
+      throw new ForbiddenException('수정 권한이 없습니다.');
     }
 
-    // this.postsRepository.update(); // 에러 발생하여 일시적으로 주석
+    await this.postsRepository.update(postId, {
+      title: title,
+      content: content,
+    });
   }
 
   // 글 삭제 - 완성
@@ -68,7 +76,7 @@ export class PostsService {
 
     // 현재 로그인한 사용자가 글 작성자인지 확인
     if (post.userId !== userId) {
-      throw new ForbiddenException();
+      throw new ForbiddenException('삭제 권한이 없습니다.');
     }
 
     await this.postsRepository.delete(id);

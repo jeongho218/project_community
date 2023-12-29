@@ -360,14 +360,31 @@ countPost(게시글 개수 세기), getAllPost(전체 글 가져오기), getSpec
 
 3. posts CRUD 중 D 완료
 
-
-추가해야하는 기능
-- seed로 admin 계정 생성할때 패스워드도 암호화하게 작성
-- swagger 내용 더 채워 넣기
+---------------------------------------------------------------------------------
 - 500 에러 처리, 꽤 빈번하게 발생하며, 에러 발생 시 어플리케이션이 다운되어 재시작이 필요함
 ERROR [ExceptionsHandler] Connection is not established with mysql database
 TypeORMError: Connection is not established with mysql database
 exception filter를 잘 사용해주면 될 것 같은데..
-- dto 사용법 다시 확인...
+=> exception filter에 에러 코드가 500일 경우에 대한 에러처리를 걸어봤는데,
+에러 발생 시 어플리케이션이 다운되는 것을 막을 수 없었음
 
+우선 개발 중에는 이대로 진행하되, 배포 시에는 PM2를 설치해서 에러 발생 시
+어플리케이션 자동 재시작을 걸어주려고 함
+```
+
+2023-12-29 금요일
+```
+1. updatePost.request.dto.ts 작성
+Users 엔티티의 'title', 'content'를 상속받는 PostingRequestDto의 내용을 상속받되, 
+PartialType을 사용해서 'title'과 'content' 중 하나만 사용해도 되도록, 
+혹은 둘 모두 작성하지 않아도 괜찮도록 작성
+
+2. posts CRUD 중 U 완료
+
+
+추가해야하는 기능
+- seed로 admin 계정 생성할때 패스워드도 암호화하게 작성
+- swagger 내용 더 채워 넣기
+- dto 사용법 다시 확인
+- 배포 시 PM2 사용
 ```

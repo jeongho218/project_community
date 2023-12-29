@@ -14,6 +14,7 @@ import { LoggedInGuard } from 'src/auth/logged-in.guard';
 import { PostingRequestDto } from './dto/posting.request.dto';
 import { User } from '../common/decorators/user.decorator';
 import { Users } from '../users/users.entity';
+import { UpdatePostRequestDto } from './dto/updatePost.request.dto';
 
 @ApiTags('POSTS')
 @Controller('api/posts')
@@ -52,12 +53,22 @@ export class PostsController {
     return this.postsService.getSpecificPost(postId);
   }
 
-  // 글 수정 - 작성 중
+  // 글 수정 - 완료
   @ApiOperation({ summary: '게시글 수정' })
   @UseGuards(LoggedInGuard)
   @Patch(':id')
-  updatePost(@Param('id') postId: number, @User() user: Users) {
-    return this.postsService.updatePost(postId, user.id);
+  async updatePost(
+    @Param('id') postId: number,
+    @Body() body: UpdatePostRequestDto,
+    @User() user: Users,
+  ) {
+    await this.postsService.updatePost(
+      postId,
+      body.title,
+      body.content,
+      user.id,
+    );
+    return `${postId} 게시글이 수정되었습니다.`;
   }
 
   // 글 삭제 - 완성
