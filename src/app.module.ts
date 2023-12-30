@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { PostsModule } from './posts/posts.module';
 import { Posts } from './posts/posts.entity';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { Posts } from './posts/posts.entity';
       charset: 'utf8mb4_general_ci' /** 이모티콘 사용을 위한 캐릭터셋 */,
     }),
     TypeOrmModule.forFeature([Users]),
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [AppService, UsersService],
