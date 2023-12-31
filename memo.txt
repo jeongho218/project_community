@@ -380,6 +380,29 @@ PartialType을 사용해서 'title'과 'content' 중 하나만 사용해도 되�
 혹은 둘 모두 작성하지 않아도 괜찮도록 작성
 
 2. posts CRUD 중 U 완료
+```
+
+2023-12-30 토요일
+```
+1. comments module, controller, service 생성
+$ nest g mo comments
+$ nest g co comments
+$ nest g s comments
+
+```
+
+2023-12-31 일요일
+```
+1. comments entity 생성
+
+2. comments.module.ts에 typeorm Comments(엔티티) import 등록
+
+3. app.module.ts/imports/TypeOrmModule.forRoot({entities}) 목록에
+comments 등록
+
+4. dataSource.ts/DataSource/entities 목록에 Comments 등록
+
+5. comments 컨트롤러, 서비스 CRUD 틀 작성
 
 
 추가해야하는 기능

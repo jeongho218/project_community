@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import { Users } from './src/users/users.entity';
 import { DataSource } from 'typeorm';
 import { Posts } from './src/posts/posts.entity';
+import { Comments } from './src/comments/comments.entity';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const dataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [Users, Posts],
+  entities: [Users, Posts, Comments],
   migrations: [__dirname + '/src/migrations/*.ts'],
   charset: 'utf8mb4_general_ci',
   synchronize: false, // 이건 false 고정, 테이블 생성은 app.module.ts에서
