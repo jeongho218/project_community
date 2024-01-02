@@ -7,10 +7,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { IsNotEmpty, IsString } from 'class-validator';
+import { Comments } from '../comments/comments.entity';
 
 @Entity({ name: 'Posts' })
 export class Posts {
@@ -56,4 +58,9 @@ export class Posts {
     },
   ])
   user: Users[];
+
+  @OneToMany(() => Comments, (comment: Comments) => comment.post, {
+    cascade: true,
+  })
+  comment: Comments[];
 }

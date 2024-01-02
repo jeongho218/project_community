@@ -13,7 +13,7 @@ export class PostsService {
     @InjectRepository(Posts) private postsRepository: Repository<Posts>,
   ) {}
 
-  // 글 작성 - userId 저장하는 부분 재검토 필요, 엔티티 관계 재확인 필요
+  // 글 작성
   async createPost(title: string, content: string, id: number) {
     await this.postsRepository.save({
       title: title,

@@ -2,6 +2,9 @@
 
 개발 중..
 
+NestJS
+MySQL
+
 ## How To Use
 
 ### Install

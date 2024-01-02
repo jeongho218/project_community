@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PostsService } from './posts.service';
-import { LoggedInGuard } from 'src/auth/logged-in.guard';
+import { LoggedInGuard } from '../auth/logged-in.guard';
 import { PostingRequestDto } from './dto/posting.request.dto';
 import { User } from '../common/decorators/user.decorator';
 import { Users } from '../users/users.entity';
@@ -37,7 +37,8 @@ export class PostsController {
     return this.postsService.countPost();
   }
 
-  // 전체 글 가져오기 - 기능은 완료되었으나 해당되는 데이터의 내용이 전부 나오고 있으므로 이를 조절할 필요가 있음
+  // 전체 글 가져오기 - 기능은 완료되었으나 해당되는 데이터의 내용이 전부 나오고 있으므로 이를 조절할 필요가 있음 -> 이 부분은 select하면 될 것 같음
+  // comments.service.ts/readComments 참조
   // ReadPostDto를 사용해보자
   @ApiOperation({ summary: '전체 게시글 가져오기' })
   @Get()

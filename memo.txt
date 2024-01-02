@@ -403,11 +403,35 @@ comments 등록
 4. dataSource.ts/DataSource/entities 목록에 Comments 등록
 
 5. comments 컨트롤러, 서비스 CRUD 틀 작성
+```
+
+2024-01-02 화요일
+```
+1. 오늘 배운 것
+https://ctrs.tistory.com/526
+
+2. comments.entity
+posts.entity와의 관계설정
+posts-(1대다)-comments
+
+3. comment.dto.ts 생성
+Comments 엔티티에서 comment 컬럼만 가져오도록
+
+4. comments.module.ts/Module/imports
+TypeOrmModule에 Posts 추가 등록
+게시글 존재여부를 확인하려는 용도
+
+5. comments CRUD 중 C 완료
+
+6. comments CRUD 중 R 완료
+
 
 
 추가해야하는 기능
+- 게시글에 이미지 업로드
 - seed로 admin 계정 생성할때 패스워드도 암호화하게 작성
 - swagger 내용 더 채워 넣기
 - dto 사용법 다시 확인
 - 배포 시 PM2 사용
+- 테스트
 ```
