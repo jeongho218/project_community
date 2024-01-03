@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { Comments } from '../comments/comments.entity';
+import { Likes } from '../likes/likes.entity';
 
 @Entity({ name: 'Posts' })
 export class Posts {
@@ -63,4 +64,9 @@ export class Posts {
     cascade: true,
   })
   comment: Comments[];
+
+  @OneToMany(() => Likes, (like: Likes) => like.post, {
+    cascade: true,
+  })
+  like: Likes[];
 }

@@ -12,6 +12,8 @@ import { PostsModule } from './posts/posts.module';
 import { Posts } from './posts/posts.entity';
 import { CommentsModule } from './comments/comments.module';
 import { Comments } from './comments/comments.entity';
+import { LikesModule } from './likes/likes.module';
+import { Likes } from './likes/likes.entity';
 
 @Module({
   imports: [
@@ -20,6 +22,7 @@ import { Comments } from './comments/comments.entity';
     AuthModule,
     PostsModule,
     CommentsModule,
+    LikesModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -27,7 +30,7 @@ import { Comments } from './comments/comments.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Users, Posts, Comments],
+      entities: [Users, Posts, Comments, Likes],
       synchronize: false /**  개발 환경일 때만 true일 것
       직접 작성한 엔터티를 DB에 적용할 때 쓰이므로, 
       true일 경우 DB가 새로 생성되어 기존 DB에 저장된 데이터가 사라질 위험성이 있음*/,

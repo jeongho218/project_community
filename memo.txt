@@ -430,9 +430,28 @@ TypeOrmModule에 Posts 추가 등록
 ```
 1. comments CRUD 중 U, D 작성
 
+2. auth.module.ts 주석 추가
+인증 순서 메모..
+
+3. Likes 모듈, 컨트롤러, 서비스, 엔티티 생성
+$ nest g mo likes
+$ nest g co likes
+$ nest g s likes
+/src/likes/likes.entity.ts
+
+4. posts.entity와 likes.entity에 관계설정 등록
+Posts-(1대다)-Likes
+
+5. app.module.ts/imports/TypeOrmModule.forRoot({entities}) 목록에
+Likes 등록
+dataSource.ts/DataSource/entities 목록에 Likes 등록
+
+6. 게시글 좋아요 등록 api giveLike(Post), 
+게시글의 좋아요 개수를 조회하는 api getLikes(Get) 작성
+
+게시글 좋아요 취소는 나중에 필요할 것 같으면 추가하기로
 
 추가해야하는 기능
-- Likes 만들기
 - 게시글에 이미지 업로드
 - seed로 admin 계정 생성할때 패스워드도 암호화하게 작성
 - swagger 내용 더 채워 넣기
