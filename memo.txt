@@ -424,14 +424,20 @@ TypeOrmModule에 Posts 추가 등록
 5. comments CRUD 중 C 완료
 
 6. comments CRUD 중 R 완료
+```
 
+2024-01-03 수요일
+```
+1. comments CRUD 중 U, D 작성
 
 
 추가해야하는 기능
+- Likes 만들기
 - 게시글에 이미지 업로드
 - seed로 admin 계정 생성할때 패스워드도 암호화하게 작성
 - swagger 내용 더 채워 넣기
 - dto 사용법 다시 확인
 - 배포 시 PM2 사용
 - 테스트
+- JWT 로그인으로 변경
 ```

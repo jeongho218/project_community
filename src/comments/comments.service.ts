@@ -37,7 +37,7 @@ export class CommentsService {
   readComments(postId: number) {
     return this.commentsRepository.find({
       where: { postId: postId },
-      select: ['id', 'postId', 'userId', 'comment'],
+      select: ['id', 'postId', 'userId', 'comment', 'createdAt'],
     });
   }
 
@@ -46,7 +46,7 @@ export class CommentsService {
     return this.commentsRepository.count({ where: { postId: postId } });
   }
 
-  // 댓글 수정 - 작성 중
+  // 댓글 수정 - 완료
   async updateComments(
     postId: number,
     id: number,
@@ -58,21 +58,19 @@ export class CommentsService {
     if (!post) {
       throw new NotFoundException('게시글이 존재하지 않습니다.');
     }
-    //
     // 댓글이 존재하는지 확인
     const cmt = await this.commentsRepository.findOne({ where: { id: id } });
     if (!cmt) {
       throw new NotFoundException('댓글이 존재하지 않습니다.');
     }
-    //
     // 현재 로그인한 사용자가 댓글 작성자인지 확인
     if (cmt.userId !== userId) {
       throw new ForbiddenException('수정 권한이 없습니다.');
     }
-    // this.commentsRepository.update({});
+    await this.commentsRepository.update(id, { comment: comment });
   }
 
-  // 댓글 삭제 - 작성 중
+  // 댓글 삭제 - 완료
   async deleteComments(postId: number, id: number, userId: number) {
     // 게시글이 존재하는지 확인
     const post = await this.postsRepository.findOne({ where: { id: postId } });
@@ -90,6 +88,7 @@ export class CommentsService {
     if (cmt.userId !== userId) {
       throw new ForbiddenException('수정 권한이 없습니다.');
     }
-    // this.commentsRepository.delete()
+    await this.commentsRepository.delete(id);
+    return true;
   }
 }

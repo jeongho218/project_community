@@ -48,8 +48,9 @@ export class CommentsController {
     return this.commentsService.countComment(postId);
   }
 
-  // 댓글 수정 - 작성 중
+  // 댓글 수정 - 완료
   @ApiOperation({ summary: '댓글 수정' })
+  @UseGuards(LoggedInGuard)
   @Patch(':postId/comment/:id')
   async updateComments(
     @Param('postId') postId: number,
@@ -66,8 +67,9 @@ export class CommentsController {
     return `댓글 수정 완료`;
   }
 
-  // 댓글 삭제 - 작성 중
+  // 댓글 삭제 - 완료
   @ApiOperation({ summary: '댓글 삭제' })
+  @UseGuards(LoggedInGuard)
   @Delete(':postId/comment/:id')
   async deleteComments(
     @Param('postId') postId: number,
