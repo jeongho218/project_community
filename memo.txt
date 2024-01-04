@@ -450,6 +450,15 @@ dataSource.ts/DataSource/entities 목록에 Likes 등록
 게시글의 좋아요 개수를 조회하는 api getLikes(Get) 작성
 
 게시글 좋아요 취소는 나중에 필요할 것 같으면 추가하기로
+```
+
+2024-01-03 수요일
+```
+1. likes.controller, likes.service
+게시글 좋아요와 좋아요 개수 조회 api 위치를 서로 바꿈
+swagger에 나열되는 순서 조정
+
+2. ERD 업로드
 
 추가해야하는 기능
 - 게시글에 이미지 업로드
@@ -459,4 +468,5 @@ dataSource.ts/DataSource/entities 목록에 Likes 등록
 - 배포 시 PM2 사용
 - 테스트
 - JWT 로그인으로 변경
+- admin 계정의 활용(다른 사용자의 게시글, 댓글 삭제 등)
 ```

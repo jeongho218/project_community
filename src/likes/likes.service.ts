@@ -15,17 +15,6 @@ export class LikesService {
     @InjectRepository(Likes) private likesRepository: Repository<Likes>,
   ) {}
 
-  // 게시글의 좋아요 개수 조회 - 완료
-  async getLikes(postId: number) {
-    // 게시글이 존재하는지 확인
-    const post = await this.postsRepository.findOne({ where: { id: postId } });
-    if (!post) {
-      throw new NotFoundException('게시글이 존재하지 않습니다.');
-    }
-
-    return this.likesRepository.count({ where: { postId: postId } });
-  }
-
   // 게시글에 좋아요 - 완료
   async giveLike(postId: number, userId: number) {
     // 게시글이 존재하는지 확인
@@ -43,5 +32,16 @@ export class LikesService {
     }
 
     await this.likesRepository.save({ postId: postId, userId: userId });
+  }
+
+  // 게시글의 좋아요 개수 조회 - 완료
+  async getLikes(postId: number) {
+    // 게시글이 존재하는지 확인
+    const post = await this.postsRepository.findOne({ where: { id: postId } });
+    if (!post) {
+      throw new NotFoundException('게시글이 존재하지 않습니다.');
+    }
+
+    return this.likesRepository.count({ where: { postId: postId } });
   }
 }

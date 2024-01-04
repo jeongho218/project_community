@@ -10,13 +10,6 @@ import { Users } from '../users/users.entity';
 export class LikesController {
   constructor(private likesService: LikesService) {}
 
-  // 게시글의 좋아요 개수 조회 - 완료
-  @ApiOperation({ summary: '좋아요 수 조회' })
-  @Get(':postId/likes')
-  getLikes(@Param('postId') postId: number) {
-    return this.likesService.getLikes(postId);
-  }
-
   // 게시글에 좋아요 - 완료
   @ApiOperation({ summary: '게시글 좋아요 추가' })
   @UseGuards(LoggedInGuard)
@@ -24,5 +17,12 @@ export class LikesController {
   async giveLike(@Param('postId') postId: number, @User() user: Users) {
     await this.likesService.giveLike(postId, user.id);
     return '좋아요 등록 완료';
+  }
+
+  // 게시글의 좋아요 개수 조회 - 완료
+  @ApiOperation({ summary: '좋아요 수 조회' })
+  @Get(':postId/likes')
+  getLikes(@Param('postId') postId: number) {
+    return this.likesService.getLikes(postId);
   }
 }
