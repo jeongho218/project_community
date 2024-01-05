@@ -2,18 +2,23 @@
 
 개발 중..
 
-NestJS
-MySQL
+### 사용한 기술
 
-## How To Use
+- Node.js
+- NestJS
+- MySQL
+- TypeORM
+- AWS RDS (DB Server)
 
-### Install
+## 사용 방법
+
+### 패키지 설치
 
 ```
 $ npm install
 ```
 
-### Config .env
+### .env 설정
 
 ```
 PORT=/* Backend port number to use */
@@ -24,20 +29,24 @@ DB_DATABASE=/* DB name to use */
 COOKIE_SECRET=/* secret key */
 ```
 
-### Running the app
+### 어플리케이션 가동
 
 ```
 $ npm run start:dev
 ```
 
-### Create DB (Default: MySQL)
+### DB 생성 (Default: MySQL)
 
 ```
 $ npm run db:create
 ```
 
-### Create Table
+### 테이블 생성
 
 ```
 $ npm run schema:sync
 ```
+
+### 이후 Swagger API 문서 참조
+
+Swagger (배포 후 하이퍼링크가 들어갈 예정)

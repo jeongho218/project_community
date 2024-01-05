@@ -5,7 +5,7 @@ import { LoggedInGuard } from '../auth/logged-in.guard';
 import { User } from '../common/decorators/user.decorator';
 import { Users } from '../users/users.entity';
 
-@ApiTags('Likes')
+@ApiTags('LIKES')
 @Controller('api/posts')
 export class LikesController {
   constructor(private likesService: LikesService) {}
