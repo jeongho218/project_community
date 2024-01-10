@@ -26,14 +26,28 @@ export class Posts {
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty({
+    example: '게시글 제목',
+    description: '게시글의 제목 입력',
+    required: true,
+  })
   @Column({ type: 'varchar' })
   title: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty({
+    example: '게시글 내용',
+    description: '게시글의 내용 입력',
+    required: true,
+  })
   @Column({ type: 'varchar' })
   content: string;
 
+  @ApiProperty({
+    example: '게시글에 들어갈 이미지',
+    description: '게시글에 들어갈 이미지 입력',
+  })
   @Column({ type: 'varchar', nullable: true })
   imgUrl: string;
 

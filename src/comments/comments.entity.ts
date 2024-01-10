@@ -19,6 +19,11 @@ export class Comments {
   id: number;
 
   // 게시글 아이디
+  @ApiProperty({
+    example: 1,
+    description: '게시글의 아이디(번호)',
+    required: true,
+  })
   @Column({ type: 'int' })
   postId: number;
 
@@ -28,6 +33,11 @@ export class Comments {
 
   @IsString()
   @IsNotEmpty({ message: '댓글 내용을 입력해주세요.' })
+  @ApiProperty({
+    example: '댓글 내용',
+    description: '댓글을 입력해주세요.',
+    required: true,
+  })
   @Column({ type: 'varchar' })
   comment: string;
 

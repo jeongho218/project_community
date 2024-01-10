@@ -4,7 +4,7 @@
 
 ### 사용한 기술
 
-- Node.js
+- TypeScript
 - NestJS
 - MySQL
 - TypeORM

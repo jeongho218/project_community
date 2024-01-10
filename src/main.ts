@@ -23,10 +23,10 @@ async function bootstrap() {
 
   // swagger
   const config = new DocumentBuilder()
-    .setTitle('Community API Document')
-    .setDescription('The Community API description')
+    .setTitle('Project Community API Document')
+    .setDescription('Project Community API 문서입니다.')
     .setVersion('0.1')
-    .addTag('Community')
+    // .addTag('Community')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
