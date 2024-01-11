@@ -461,16 +461,23 @@ swagger에 나열되는 순서 조정
 2. ERD 업로드
 ```
 
-2024-01-03 수요일
+2024-01-10 수요일
 ```
 1. USERS swagger 업데이트
-설명 추가와 request, response예시를 보여줄 DTO 생성 및 적용
+설명 추가와 request, response 예시를 보여줄 DTO 생성 및 적용
+```
+
+2024-01-11 목요일
+```
+1. POSTS swagger 업데이트
+설명 추가와 request, response 예시를 보여줄 DTO 생성 및 적용
+
 
 추가해야하는 기능
+- JWT 로그인으로 변경
 - 게시글에 이미지 업로드
 - seed로 admin 계정 생성할때 패스워드도 암호화하게 작성
 - 배포 시 PM2 사용
 - 테스트
-- JWT 로그인으로 변경
 - admin 계정의 활용(다른 사용자의 게시글, 댓글 삭제 등)
 ```

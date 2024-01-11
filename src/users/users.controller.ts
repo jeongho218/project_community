@@ -39,6 +39,10 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   // 회원 정보 불러오기
+  @ApiOperation({
+    summary: '내 회원정보 불러오기',
+    description: `현재 로그인한 사용자의 정보를 불러옵니다. 로그인하지 않은 사용자일 경우 "로그인 하지 않은 사용자입니다." 텍스트가 출력됩니다.`,
+  })
   @ApiResponse({
     status: 200,
     description: '현재 로그인한 사용자의 내용을 반환',
@@ -46,12 +50,9 @@ export class UsersController {
   })
   @ApiResponse({
     status: 201,
-    description: '로그인하지 않았을 경우, 이 반환도 HTTP 코드 200입니다.',
+    description:
+      '로그인하지 않았을 경우, 이 반환도 HTTP 코드 200입니다. 아래 예시와 같이 객체 타입으로 나오는 것이 아닌 값의 자리에 있는 문자열만 출력됩니다.',
     type: NotLoggedInUserResponseDto,
-  })
-  @ApiOperation({
-    summary: '내 회원정보 불러오기',
-    description: `현재 로그인한 사용자의 정보를 불러옵니다. 로그인하지 않은 사용자일 경우 "로그인 하지 않은 사용자입니다." 텍스트가 출력됩니다.`,
   })
   @Get()
   getUsers(@User() user: Users) {
@@ -59,7 +60,6 @@ export class UsersController {
   }
 
   // 회원 가입
-  @UseGuards(NotLoggedInGuard)
   @ApiOperation({
     summary: '회원가입',
     description:
@@ -67,7 +67,8 @@ export class UsersController {
   })
   @ApiResponse({
     status: 201,
-    description: '회원가입 성공 시 반환되는 내용',
+    description:
+      '회원가입 성공 시 반환되는 내용. 아래 예시와 같이 객체 타입으로 나오는 것이 아닌 값의 자리에 있는 문자열만 출력됩니다.',
     type: SucceedToSignUpResponseDto,
   })
   @ApiResponse({
@@ -88,6 +89,7 @@ export class UsersController {
       '이미 로그인 한 상태에서 회원가입을 시도했을 경우 반환되는 내용',
     type: ForbiddenResponseDto,
   })
+  @UseGuards(NotLoggedInGuard)
   @Post()
   async signUp(@Body() body: SignUpRequestDto) {
     await this.usersService.signUp(body.email, body.nickname, body.password);
@@ -95,19 +97,20 @@ export class UsersController {
   }
 
   // 로그인
+  @ApiOperation({
+    summary: '로그인',
+    description: '로그인을 진행합니다.',
+  })
   @ApiResponse({
     status: 201,
-    description: '로그인 성공 시 반환되는 내용',
+    description:
+      '로그인 성공 시 반환되는 내용. 아래 예시와 같이 객체 타입으로 나오는 것이 아닌 값의 자리에 있는 문자열만 출력됩니다.',
     type: SucceedToLoginResponseDto,
   })
   @ApiResponse({
     status: 401,
     description: '로그인 실패 시 반환되는 내용',
     type: FailedToLoginResponseDto,
-  })
-  @ApiOperation({
-    summary: '로그인',
-    description: '로그인을 진행합니다.',
   })
   @UseGuards(LocalAuthGuard)
   @Post('login')
@@ -117,11 +120,15 @@ export class UsersController {
   }
 
   // 로그아웃
-  @ApiCookieAuth('connect.sid')
-  @UseGuards(LoggedInGuard)
+  @ApiOperation({
+    summary: '로그아웃',
+    description:
+      '로그아웃을 진행합니다. 가드가 설정되어 있어 로그인 상태가 아니라면 사용할 수 없습니다.',
+  })
   @ApiResponse({
     status: 201,
-    description: '로그아웃 성공 시 반환되는 내용',
+    description:
+      '로그아웃 성공 시 반환되는 내용. 아래 예시와 같이 객체 타입으로 나오는 것이 아닌 값의 자리에 있는 문자열만 출력됩니다.',
     type: SucceedToLogoutResponseDto,
   })
   @ApiResponse({
@@ -130,11 +137,8 @@ export class UsersController {
       '로그인하지 않은 상태에서 로그아웃을 시도했을 경우 반환되는 내용',
     type: ForbiddenResponseDto,
   })
-  @ApiOperation({
-    summary: '로그아웃',
-    description:
-      '로그아웃을 진행합니다. 가드가 설정되어 있어 로그인 상태가 아니라면 사용할 수 없습니다.',
-  })
+  @ApiCookieAuth('connect.sid')
+  @UseGuards(LoggedInGuard)
   @Post('logout')
   async logOut(@Response() res) {
     res.clearCookie('connect.sid', { httpOnly: true });

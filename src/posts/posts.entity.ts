@@ -51,6 +51,7 @@ export class Posts {
   @Column({ type: 'varchar', nullable: true })
   imgUrl: string;
 
+  @ApiProperty({ example: '2024-01-11T09:36:24.328Z' })
   @CreateDateColumn()
   createdAt: Date;
 

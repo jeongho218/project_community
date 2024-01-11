@@ -29,17 +29,46 @@ export class PostsService {
 
   // 전체 글 가져오기 - 완료
   async getAllPost() {
-    return await this.postsRepository.find({});
+    return await this.postsRepository
+      .createQueryBuilder('post')
+      .select([
+        'post.id',
+        'post.userId',
+        'post.title',
+        'post.content',
+        'post.createdAt',
+        'user.nickname',
+      ])
+      .leftJoin('post.user', 'user')
+      .getMany();
+    // Before
+    // return await this.postsRepository.find({
+    //   select: ['id', 'userId', 'title', 'content', 'createdAt'],
+    // });
   }
 
   // 특정 글 가져오기 - 완료
   async getSpecificPost(postId: number) {
     // 게시글이 존재하는지 확인
-    const post = await this.postsRepository.findOne({ where: { id: postId } });
-    if (!post) {
+    const exist = await this.postsRepository.findOne({ where: { id: postId } });
+    if (!exist) {
       throw new NotFoundException('게시글이 존재하지 않습니다.');
     }
-    return post;
+    return await this.postsRepository
+      .createQueryBuilder('post')
+      .select([
+        'post.id',
+        'post.userId',
+        'post.title',
+        'post.content',
+        'post.createdAt',
+        'user.nickname',
+      ])
+      .where('post.id = :postId', { postId: postId })
+      .leftJoin('post.user', 'user')
+      .getOne();
+    // Before
+    // return exist;
   }
 
   // 글 수정 - 완료
