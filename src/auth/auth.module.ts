@@ -10,7 +10,7 @@ import { LocalSerializer } from './local.serializer';
   imports: [
     PassportModule.register({ session: true }),
     // JWT로 변경 시 { session: false }
-    // 인증 절차: local-auth.gaurt.ts -> local.strategy.ts -> auth.service.ts
+    // 인증 절차: local-auth.guard.ts -> local.strategy.ts -> auth.service.ts
     // -> local.strategy.ts -> local.serializer.ts
     TypeOrmModule.forFeature([Users]),
   ],

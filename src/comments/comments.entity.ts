@@ -41,6 +41,7 @@ export class Comments {
   @Column({ type: 'varchar' })
   comment: string;
 
+  @ApiProperty({ example: '2024-01-12T11:18:51.162Z' })
   @CreateDateColumn()
   createdAt: Date;
 

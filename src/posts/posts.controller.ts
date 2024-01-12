@@ -22,6 +22,7 @@ import { GetPostResponseDto } from './dto/response/getPost.response.dto';
 import { NotFoundPostResponseDto } from '../common/dto/404NotFound.response.dto';
 import { UpdatedPostResponseDto } from './dto/response/updatePost.response.dto';
 import { DeletePostResponseDto } from './dto/response/deletePost.response.dto';
+import { FailedToPostResponseDto } from './dto/response/failedToPost.response.dto';
 
 @ApiTags('POSTS')
 @Controller('api/posts')
@@ -36,8 +37,15 @@ export class PostsController {
   })
   @ApiResponse({
     status: 201,
-    description: '게시글이 성공적으로 작성되었을 경우 반환되는 내용',
+    description:
+      '게시글이 성공적으로 작성되었을 경우 반환되는 내용. 아래 예시와 같이 객체 타입으로 나오는 것이 아닌 값의 자리에 있는 문자열만 출력됩니다.',
     type: SucceedToCreatePostResponseDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description:
+      '게시글 작성 실패 시 반환되는 내용, 잘못된 Body("title"과 "content" 둘 중 하나가 없거나, 문자열이 아님)가 입력되었을 경우',
+    type: FailedToPostResponseDto,
   })
   @ApiResponse({
     status: 403,
@@ -115,6 +123,12 @@ export class PostsController {
     description:
       '게시글을 수정하였을때 반환되는 내용. 아래 예시와 같이 객체 타입으로 나오는 것이 아닌 값의 자리에 있는 문자열만 출력됩니다.',
     type: UpdatedPostResponseDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description:
+      '게시글 수정 실패 시 반환되는 내용, 잘못된 Body("title"과 "content" 둘 모두 없거나, 문자열이 아님)가 입력되었을 경우',
+    type: FailedToPostResponseDto,
   })
   @ApiResponse({
     status: 403,

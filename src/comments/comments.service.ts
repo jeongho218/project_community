@@ -33,7 +33,12 @@ export class CommentsService {
   }
 
   // 댓글 조회 - 완료
-  readComments(postId: number) {
+  async readComments(postId: number) {
+    const post = await this.postsRepository.findOne({ where: { id: postId } });
+    if (!post) {
+      throw new NotFoundException('게시글이 존재하지 않습니다.');
+    }
+
     return this.commentsRepository.find({
       where: { postId: postId },
       select: ['id', 'postId', 'userId', 'comment', 'createdAt'],
