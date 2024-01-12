@@ -476,6 +476,13 @@ swagger에 나열되는 순서 조정
 2024-01-11 목요일
 ```
 1. COMMENTS swagger 업데이트
+설명 추가와 request, response 예시를 보여줄 DTO 생성 및 적용
+```
+
+2024-01-11 목요일
+```
+1. LIKES swagger 업데이트
+설명 추가와 request, response 예시를 보여줄 DTO 생성 및 적용
 
 추가해야하는 기능
 - JWT 로그인으로 변경
